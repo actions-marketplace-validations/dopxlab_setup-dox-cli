@@ -62,14 +62,6 @@ jobs:
 
 ---
 
-## ❌ Limitations
-
-* Does not run builds or deployments
-* Does not enforce project structure
-* Tools must be explicitly configured
-
----
-
 ## 📄 License
 
 MIT License
