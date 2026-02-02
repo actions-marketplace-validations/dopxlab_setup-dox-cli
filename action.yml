@@ -6,9 +6,25 @@ branding:
   icon: "terminal"
   color: "gray-dark"
 
+inputs:
+  custom-dir:
+    description: "Custom directory for DOX customization files"
+    required: false
+    default: "$HOME/.dox/customize"
+  resources-dir:
+    description: "Directory for DOX resources cache"
+    required: false
+    default: "$HOME/dox_resources"
+
 runs:
   using: "composite"
   steps:
+    - name: Configure DOX environment
+      shell: bash
+      run: |
+        echo "DOX_CUSTOM_DIR=${{ inputs.custom-dir }}" >> $GITHUB_ENV
+        echo "DOX_RESOURCES_DIR=${{ inputs.resources-dir }}" >> $GITHUB_ENV
+    
     - name: Install DOX CLI
       shell: bash
       run: |
