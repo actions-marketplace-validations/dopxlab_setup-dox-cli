@@ -19,14 +19,13 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Configure DOX environment
-      shell: bash
-      run: |
-        echo "DOX_CUSTOM_DIR=${{ inputs.custom-dir }}" >> $GITHUB_ENV
-        echo "DOX_RESOURCES_DIR=${{ inputs.resources-dir }}" >> $GITHUB_ENV
-    
     - name: Install DOX CLI
       shell: bash
+      env:
+        DOX_CUSTOM_DIR: ${{ inputs.custom-dir }}
+        DOX_RESOURCES_DIR: ${{ inputs.resources-dir }}
       run: |
         curl -fsSL https://raw.githubusercontent.com/dopxlab/dox-cli/main/install.sh | bash
+        echo "DOX_CUSTOM_DIR=${{ inputs.custom-dir }}" >> $GITHUB_ENV
+        echo "DOX_RESOURCES_DIR=${{ inputs.resources-dir }}" >> $GITHUB_ENV
         echo "BASH_ENV=$HOME/.dox/bin/dox-wrapper" >> $GITHUB_ENV
